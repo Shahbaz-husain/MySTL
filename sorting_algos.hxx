@@ -191,4 +191,4 @@ void count_sort(T (&arr)[N])
 }
 
 
-// merge sort will be added soon
+// merge sort will be added very shortly
