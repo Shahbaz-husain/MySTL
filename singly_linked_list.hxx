@@ -327,6 +327,32 @@ class Linked_list
         }
 
 
+        // function to return merging node of 2 merged Linked Lists
+        T findMergeNode(Node<T>* head1, Node<T>* head2) {
+            Node<T>* iter1 = head1;
+            Node<T>* iter2 = head2;
+            while(iter1 != iter2){
+                if(iter1 == nullptr)
+                    iter1 = head1;
+                else
+                    iter1 = iter1->next;
+                    
+                if(iter2 == nullptr)
+                    iter2 = head2;
+                else
+                    iter2 = iter2->next;
+                    
+                if (iter1 == nullptr && iter2 == nullptr) {
+                    break;
+                }
+            }
+            
+            if(iter1 != nullptr)
+                return iter1->data;
+            return -1;
+        }
+
+
         // Destructor to free allocated memory
         ~Linked_list() {
             Node<T>* current = head;

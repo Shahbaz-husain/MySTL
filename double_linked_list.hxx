@@ -24,6 +24,7 @@ class Doubly_linked_list
             count++;
         }
 
+
         // function to insert an element at the beginning
         void insert_at_begin(T data)
         {
@@ -44,6 +45,7 @@ class Doubly_linked_list
                 head = new_node;
             }
         }
+
 
         // function to insert an element at the end
         void insert_at_end(T data)
@@ -66,6 +68,7 @@ class Doubly_linked_list
             }
         }
 
+
         // function to insert an element at the given index
         void insert_at(long index, T data)
         {
@@ -86,6 +89,7 @@ class Doubly_linked_list
                 new_node->prev = iter;
             }
         }
+
 
         // To traverse a doubly linked list
         void traverse_doubly_linked_list()
@@ -110,6 +114,7 @@ class Doubly_linked_list
             std :: cout << std :: endl;
         }
 
+
         // To traverse a doubly linked list in reverse order
         void reverse_traverse_doubly_linked_list()
         {
@@ -132,6 +137,58 @@ class Doubly_linked_list
             }
             std :: cout << std :: endl;
         }
+
+
+        // function to add a new_node in sorted order
+        void sortedInsert(T data) {
+            Node<T>* new_node = new Node<T>(data);
+            // Handling empty LL and only one element LL cases
+            if(head == nullptr || head -> data > data){
+                new_node -> next = head;
+                if(head != nullptr)
+                {
+                    head->prev = new_node;
+                }
+                head = new_node;
+            }
+
+            Node<T>* iter = head;
+
+            // Loop will continue until either iter reaches the last element or iter's next elements value is greater than new data
+            while(iter->next!= nullptr and iter->next->data < data)
+            {
+                iter = iter->next;
+                // cout << iter->data << endl;
+            }
+
+            // Handling the case if iter->next is not nullptr
+            if (iter->next != nullptr) {
+                new_node->next = iter->next;
+                iter->next->prev = new_node;
+            }
+            iter->next = new_node;
+            new_node->prev = iter;
+        }
+
+
+        // Reverse a doubly linked list (Note : Make a clone first of the original LL)
+        void reverse() {
+            if(head == nullptr or head->next == nullptr)
+                return;
+            Node<T>* iter = head;
+            Node<T>* temp = nullptr;
+            while(iter != nullptr){
+                temp = iter->prev;
+                iter->prev = iter->next;
+                iter->next = temp;
+                
+                temp = iter;
+                iter = iter->prev; 
+            }
+            
+            head = temp;
+        }
+
 
         // destructor to free memory and prevent memory leak
         ~Doubly_linked_list()
